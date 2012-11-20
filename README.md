@@ -118,8 +118,8 @@ The JSONDB schema is very straight forward, all you need to add is:
 2. Create a new JSONDB object with the jsondb content you want to use
 3. Call the method GetSQL and the output is a string with the SQL Create Statement
 
-    include_once("jsondb.php");
-    $json_content=file_get_contents("example.jsondb");
-    $jsondb=new JsonDB($json_content);
-    echo $jsondb->getSQL();
+     include_once("jsondb.php");
+     $json_content=file_get_contents("example.jsondb");
+     $jsondb=new JsonDB($json_content);
+     echo $jsondb->getSQL();
 
