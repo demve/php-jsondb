@@ -53,74 +53,77 @@ The JSONDB schema is very straight forward, all you need to add is:
 
 #### JSONDB Example:(not quoted on purpose)
 
-    {
-    	//The Verison of your structure
-    	version:0.1,
-    	//The global options of your structure
-    	global:{
-    		//The CustomTypes in this structure
-    		types:{
-    			//Every custom type name is an object
-    			CustomType1:{
-    				//this is a field object
-    				type:"int(10)",
-    				attr:"unsigned",
-    				extra:"auto_increment",
-    				null:false
-    			},
-    			etc...
-    		},
-    		//the defaults atributes for all fields
-    		defaultsAttributes:{
-    			//this is also a field object
-    			null:true
-    		},
-    		//The default value for "ON UPDATE" of all foreign keys
-    		fkUpdate:"no action",
-    		//The default value for "ON DELETE" of all foreign keys
-    		fkDelete:"cascade"
-    	},
-    	//The Tables
-    	tables:{
-    		//Each key is a table name
-    		users:{
-    			fields:{
-    				//if the field is a string, it has to be a custom type defined in global
-    				id:CustomType1,
-    				//else the field is a field object
-    				name:{
-    					type:"string(45)",
-    					null:false
-    				}
-    			},
-    			keys:{
-    				//the primary key
-    				pk:id,
-    				// the unike keys
-    				uk:[name],
-    				// the foreign keys
-    				fk:[
-    					//Creates user_type_id in the table
-    					{
-    						table:user_type,
-    						column:id,
-    						onDelete:"No Action"
-    					}
-    				]
-    			}
-    		}
-    	}
-    }
+	{
+		//The Verison of your structure
+		version:0.1,
+		//The global options of your structure
+		global:{
+			//The CustomTypes in this structure
+			types:{
+				//Every custom type name is an object
+				CustomType1:{
+					//this is a field object
+					type:"int(10)",
+					attr:"unsigned",
+					extra:"auto_increment",
+					null:false
+				},
+				etc...
+			},
+			//the defaults atributes for all fields
+			defaultsAttributes:{
+				//this is also a field object
+				null:true
+			},
+			//The default value for "ON UPDATE" of all foreign keys
+			fkUpdate:"no action",
+			//The default value for "ON DELETE" of all foreign keys
+			fkDelete:"cascade"
+		},
+		//The Tables
+		tables:{
+			//Each key is a table name
+			users:{
+				fields:{
+					//if the field is a string, it has to be a custom type defined in global
+					id:CustomType1,
+					//else the field is a field object
+					name:{
+						type:"string(45)",
+						null:false
+					}
+				},
+				keys:{
+					//the primary key
+					pk:id,
+					// the unike keys
+					uk:[name],
+					// the foreign keys
+					fk:[
+						//Creates user_type_id in the table
+						{
+							table:user_type,
+							column:id,
+							onDelete:"No Action"
+						}
+					]
+				}
+			}
+		}
+	}
 
 ### The PHP CLASS
 
 1. Include the jsondb.php file in PHP
 2. Create a new JSONDB object with the jsondb content you want to use
 3. Call the method GetSQL and the output is a string with the SQL Create Statement
-
-
-     include_once("jsondb.php");
-     $json_content=file_get_contents("example.jsondb");
-     $jsondb=new JsonDB($json_content);
-     echo $jsondb->getSQL();
-
+	
+	
+	< ?php
+		
+		include_once("jsondb.php");
+		$json_content=file_get_contents("example.jsondb");
+		$jsondb=new JsonDB($json_content);
+		echo $jsondb->getSQL();
+		
+	?>
