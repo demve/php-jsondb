@@ -59,7 +59,7 @@
 			}
 		}
 		public function add_defaults_attributes($table_name,$field_name){
-			foreach ($this->global["defaults_attributes"] as $key => $value) {
+			foreach ($this->global["defaultsAttributes"] as $key => $value) {
 				if(!isset($this->tables[$table_name][$field_name][$key])){
 					$this->tables[$table_name][$field_name][$key]=$value;
 				}
@@ -126,7 +126,7 @@
 				foreach($fk_array as $k=>$fk) {
 					$const=" ADD CONSTRAINT `{$fk['table']}_{$table}` FOREIGN KEY (`{$fk['field']}`)";
 					$refer=" REFERENCES `{$fk['table']}` (`{$fk['column']}`)";
-					$on=" ON DELETE {$fk['delete']}  ON UPDATE {$fk['update']}";
+					$on=" ON DELETE {$fk['on_delete']}  ON UPDATE {$fk['on_update']}";
 					$sql_temp[]="{$const}{$refer}{$on}";
 				}
 				$sql.=join(",\r\n",$sql_temp).";\r\n";

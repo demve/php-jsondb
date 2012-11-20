@@ -9,106 +9,26 @@
 			"int":{"type": "int(10)", "attr": "unsigned"},
 			"date":{"type": "datetime"}
 		},
-		"defaults_attributes":{
+		"defaultsAttributes":{
 			"null":false
 		},
-		"fk_update":"cascade",
-		"fk_delete":"cascade"
+		"fkUpdate":"cascade",
+		"fkDelete":"cascade"
 	},
 	"tables":{
-		"actividad":{
+		"activities":{
 			"fields":{
 				"id":"id",
-				"tipo":"string",
-				"evento":"longString",
+				"name":"string",
+				"description":"longString",
 				"date":"date"
 			},
 			"keys":{
 				"pk":"id",
-				"fk":[{"table":"usuario","column":"id"}]
+				"fk":[{"table":"user","column":"id"}]
 			}
 		},
-		"aplicacion":{
-			"fields":{
-				"id":"id",
-				"id_app":"string",
-				"nombre":"string",
-				"descripcion":"text",
-				"url":"longString",
-				"icono":"longString",
-				"ruta":"string"
-			},
-			"keys":{
-				"pk":"id",
-				"fk":[{"table":"base","column":"id"}],
-				"uk":["id_app"]
-			}
-		},
-		"aplicacion_tipo_usuario":{
-			"fields":{
-				"id":"id"
-			},
-			"keys":{
-				"pk":"id",
-				"fk":[
-					{"table":"tipo_usuario","column":"id"},
-					{"table":"aplicacion","column":"id"}
-				]
-			}
-		},
-		"aplicacion_usuario":{
-			"fields":{
-				"id":"id"
-			},
-			"keys":{
-				"pk":"id",
-				"fk":[
-					{"table":"usuario","column":"id"},
-					{"table":"aplicacion","column":"id"}
-				]
-			}
-		},
-		"base":{
-			"fields":{
-				"id":"id",
-				"id_base":"string",
-				"version":"string",
-				"nombre":"string",
-				"descripcion":"text"
-			},
-			"keys":{
-				"pk":"id",
-				"uk":["id_base"]
-			}
-		},
-		"escritorio":{
-			"fields":{
-				"id":"id",
-				"orden":"int"
-			},
-			"keys":{
-				"pk":"id",
-				"fk":[
-					{"table":"usuario","column":"id"},
-					{"table":"aplicacion","column":"id"}
-				]
-			}
-		},
-		"feedback":{
-			"fields":{
-				"id":"id",
-				"paginas":"text",
-				"titulo":"string",
-				"texto":"text"
-			},
-			"keys":{
-				"pk":"id",
-				"fk":[
-					{"table":"usuario","column":"id"}
-				]
-			}
-		},
-		"login":{
+		"login_record":{
 			"fields":{
 				"id":"id",
 				"date":"date"
@@ -116,140 +36,60 @@
 			"keys":{
 				"pk":"id",
 				"fk":[
-					{"table":"usuario","column":"id"}
+					{"table":"user","column":"id"}
 				]
 			}
 		},
-		"noticia":{
+		"news":{
 			"fields":{
 				"id":"id",
-				"titulo":"string",
-				"cuerpo":"text",
+				"title":"string",
+				"body":"text",
 				"date":"date"
 			},
 			"keys":{
 				"pk":"id",
 				"fk":[
-					{"table":"usuario","column":"id"}
+					{"table":"user","column":"id"}
 				]
 			}
 		},
-		"notificacion":{
+		"user":{
 			"fields":{
 				"id":"id",
-				"id_app":"string",
-				"notificaciones":"int"
-			},
-			"keys":{
-				"pk":"id",
-				"fk":[
-					{"table":"usuario","column":"id"},
-					{"table":"aplicacion","column":"id"}
-				]
-			}
-		},
-		"permiso":{
-			"fields":{
-				"id":"id",
-				"id_permiso":"string",
-				"nombre":"string",
-				"descripcion":"text",
-				"tipo":{"type":"enum('metodo','permiso')"}
-			},
-			"keys":{
-				"pk":"id",
-				"fk":[
-					{"table":"base","column":"id"}
-				],
-				"uk":["id_permiso"]
-			}
-		},
-		"permiso_tipo_usuario":{
-			"fields":{
-				"id":"id"
-			},
-			"keys":{
-				"pk":"id",
-				"fk":[
-					{"table":"tipo_usuario","column":"id"},
-					{"table":"permiso","column":"id"}
-				]
-			}
-		},
-		"permiso_usuario":{
-			"fields":{
-				"id":"id"
-			},
-			"keys":{
-				"pk":"id",
-				"fk":[
-					{"table":"usuario","column":"id"},
-					{"table":"permiso","column":"id"}
-				]
-			}
-		},
-		"tipo_usuario":{
-			"fields":{
-				"id":"id",
-				"nombre":"string"
-			},
-			"keys":{
-				"pk":"id",
-				"uk":["nombre"]
-			}
-		},
-		"usuario":{
-			"fields":{
-				"id":"id",
-				"usuario":"string",
-				"nombre":"string",
-				"apellido":"string",
+				"username":"string",
+				"name":"string",
+				"lastname":"string",
 				"email":"string",
-				"clave":{"type":"char(32)"},
-				"recordar":{"type":"char(32)"},
-				"id_sesion":{"type":"char(32)"}
+				"password":{"type":"char(32)"},
+				"session_id":{"type":"char(32)"}
 			},
 			"keys":{
 				"pk":"id",
-				"fk":[{"table":"tipo_usuario","column":"id"}],
-				"uk":["usuario","id_sesion"]
+				"uk":["user","sesion_id"]
 			}			
 		},
 		"widget":{
 			"fields":{
 				"id":"id",
-				"id_widget":"string",
-				"nombre":"string",
-				"descripcion":"text",
+				"name":"string",
+				"description":"text",
 				"url":"longString",
-				"icono":"longString"
+				"icon":"longString"
 			},
 			"keys":{
 				"pk":"id",
-				"fk":[{"table":"base","column":"id"}],
-				"uk":["id_widget"]
+				"uk":["name"]
 			}
 		},
-		"widget_tipo_usuario":{
+		"widget_user":{
 			"fields":{
 				"id":"id"
 			},
 			"keys":{
 				"pk":"id",
 				"fk":[
-					{"table":"tipo_usuario","column":"id"},
-					{"table":"widget","column":"id"}
-				]
-			}
-		},
-		"widget_usuario":{
-			"fields":{
-				"id":"id"
-			},
-			"keys":{
-				"pk":"id",
-				"fk":[
-					{"table":"usuario","column":"id"},
+					{"table":"user","column":"id"},
 					{"table":"widget","column":"id"}
 				]
 			}
